@@ -1,0 +1,22 @@
+{
+  "name": "cloud-notation",
+  "version": "1.0.0",
+  "description": "Music notation in the Cloud",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://giangra@bitbucket.org/giangra/CloudNotation.git"
+  },
+  "author": "andrew.giangrant@outlook.com",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/giangra/CloudNotation#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "express-session": "^1.15.0"
+  }
+}

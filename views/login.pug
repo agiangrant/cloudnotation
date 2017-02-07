@@ -1,0 +1,33 @@
+html
+    head
+        script(src="jquery-3.1.1.min.js")
+        script(src="bootstrap.min.js")
+        script(src="scriptL.js")
+        link(rel="stylesheet" type="text/css" href="bootstrap.min.css")
+        title= "CloudNotation - Login"
+    body
+        -if (message)
+            p #{message}
+        div(id="login")
+            div(class="form-group")
+                form(action="/login" method="post")
+                    h1 Login
+                    div
+                        label(for="loginUsername") Username
+                        input(id="loginUsername" type="text" name="username")
+                    div
+                        label(for="loginPassword") Password
+                        input(id="loginPassword" type="password" name="password")
+                    div
+                        input(type="submit" value="Log in")
+        div(id="signup")
+            form(action="/login" method="post")
+                h1 Sign Up
+                div
+                    label(for="signupUsername") Username
+                    input(id="signupUsername" type="text" name="desiredUsername")
+                div
+                    label(for="signupPassword") Password
+                    input(id="signupPassword" type="password" name="signupPassword")
+                div
+                    input(type="submit" value="Sign Up")

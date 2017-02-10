@@ -12,14 +12,8 @@ var app = express();
 
 passport.use(new localStrategy(
 	function(username, password, done) {
-		User.findByUsername(username, function(err, user) {
-			if(err)
-				return done(err);
-			if(!user)
-				return done(null, false, {message: 'Incorrect username.'});
-			if(user.password !== password)
-				return done(null, false, {message: 'Incorrect password.'});
-			return done(null, user);
+		User.findByUsername(username, password, function(err, user, message) {
+			return done(err, user, message);
 		});
 	}
 ));
@@ -41,26 +35,34 @@ app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "views", "css")));
 app.use(express.static(path.join(__dirname, "views", "javascript")));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cookieParser());
 app.use(expressSession({
-	secret: 'make this more secure later',
-	resave: false,
-	saveUninitialized: false,
-	cookie: {secure: true}
-}));
-
-app.use(flash());
+	secret: 'secret'
+}));//{
+// 	secret: 'make this more secure later',
+// 	resave: false,
+// 	saveUninitialized: false,
+// 	store: new mongoStore({
+// 		url: globals.dbUrl,
+// 		touchAfter: 24*60*60
+// 	})
+// }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
 app.get('/', function(req, res) {
-	res.render('index');
+	if(req.user)
+		res.render('index');
+	else
+		res.redirect('login');
 });
 
 app.get('/login', function(req, res) {
-	res.render('login', undefined);
+	res.render('login');
 });
 
 app.post('/login', function(req, res, next) {
@@ -69,7 +71,11 @@ app.post('/login', function(req, res, next) {
 			return next(err);
 		if(!user)
 			return res.render("login", info);
-		return res.redirect('/');
+		req.login(user, function(err) {
+			if(err)
+				console.log(err.toString());
+			return res.redirect('/');
+		});
 	})(req, res, next);
 });
 

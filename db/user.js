@@ -69,42 +69,42 @@ exports.registerUser = function(req, res) {
 	else {
 		var message = "";
 		if(!_.isString(req.body.username)) {
-			message += "Please enter an email address.\n";
+			message += "Please enter an email address.\r\n";
 		}
 		else if(req.body.username.search(/^..*@..*\...*$/)) {
-			message += "Please enter a valid email address.\n";
+			message += "Please enter a valid email address.\r\n";
 		}
 		if(!_.isString(req.body.password)) {
-			message += "Please enter a password.\n";
+			message += "Please enter a password.\r\n";
 		}
 		else {
 			if(req.body.password.search(/[A-Z]/) === -1) {
-				message += "Password must contain at least one uppercase character.\n";
+				message += "Password must contain at least one uppercase character.\r\n";
 			}
 			if(req.body.password.search(/[a-z]/) === -1) {
-				message += "Password must contain at least one lowercase character.\n";
+				message += "Password must contain at least one lowercase character.\r\n";
 			}
 			if(req.body.password.search(/[0-9]/) === -1) {
-				message += "Password must contain at least one number.\n";
+				message += "Password must contain at least one number.\r\n";
 			}
 			if(req.body.password.length < 6) {
-				message += "Password must be more than 6 characters in length.\n";
+				message += "Password must be more than 6 characters in length.\r\n";
 			}
 			if(req.body.password.length > 255){
-				message += "Password must be less than 255 characters in length.\n";
+				message += "Password must be less than 255 characters in length.\r\n";
 			}
 			// fix this later
-			if(!_.isString(req.body.firstName)) {
-				message += "Please enter first name.\n";
+			if(!_.isString(req.body.firstName) || (_.isString(req.body.firstName) && req.body.firstName.length < 1)) {
+				message += "Please enter first name.\r\n";
 			}
-			if(!_.isString(req.body.lastName)) {
-				message += "Please enter last name.\n";
+			if(!_.isString(req.body.lastName) || (_.isString(req.body.lastName) && req.body.lastName.length < 1)) {
+				message += "Please enter last name.\r\n";
 			}
 			if(req.body.passwordConfirm !== req.body.password) {
-				message += "Confirm password and password do not match.\n";
+				message += "Confirm password and password do not match.\r\n";
 			}
 			if(message.length > 0) {
-				return res.status(400).send({error: message});
+				return res.render('login',{signupError: message});
 			}
 			register(req, res);
 		}
@@ -127,7 +127,7 @@ function register(req, res) {
 				if(err){
 					console.log(err.toString() + " blah");
 					db.close();
-					return res.status(500).send();
+					return res.render('login',{signupError: "An internal server error has occurred.  Please try your request later."});
 				}
 				if(!doc) {
 					var passwordSalt = bcrypt.genSaltSync(11);
@@ -137,17 +137,16 @@ function register(req, res) {
 						if(err) {
 							console.log(err.toString() + "blah2");
 							db.close();
-							return res.status(500).send();
+							return res.render('login',{signupError: "An internal server error has occurred. Please try your request later."});
 						}
 						console.log('created user');
-						res.redirect('/registerSuccess');
+						res.render('login', {signupSuccess: "Your account has been created.  You may login now."});
 					});
 				}
 				else {
 					db.close();
-					return res.status(400).send({error: "Email address is already being used."});
+					return res.render('login', {error: "Email address is already being used."});
 				}
-				res.redirect('/login');
 			});
 		});
 	});

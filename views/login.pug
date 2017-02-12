@@ -7,13 +7,13 @@ html
         link(rel="stylesheet" type="text/css" href="loginStyle.css")
         title= "CloudNotation - Login"
     body
+        div(id="header")
+            h3 CloudNotation
         div(id="container")
-            div(id="header")
-                h3 CloudNotation
-            -if (message)
-                p #{message}
-            div(class="contentContainer")
-                div(id="login")
+            div(id="loginContainer")
+                div(id="login" class="signup-form-input")
+                    -if (message) 
+                        p(id="login-error-text") #{message}
                     div(class="form-group")
                         form(action="/login" method="post")
                             h1 Login
@@ -26,19 +26,26 @@ html
                             br
                             div
                                 input(type="submit" class="btn btn-default" value="Log in")
-                div(id="signup")
+                div(id="signup" class="signup-form-input")
+                    -if(signupError)
+                        p(id="signup-error-text") #{signupError}
+                    -if(signupSuccess)
+                        p(id="signup-success-text") #{signupSuccess}
                     form(action="/register" method="post")
                         h1 Sign Up
-                        div(class="signup-form-input")
+                        div
                             input(id="firstName" class="form-control half-width" type="text" name="firstName" placeHolder="First Name")
                             input(id="lastName" class="form-control half-width" type="text" name="lastName" placeHolder="Last Name")
                         br
-                        div(class="signup-form-input")
+                        div
                             input(id="signupUsername" class="form-control" type="text" name="username" placeholder="Email")
-                        div(class="signup-form-input")
+                        div
                             input(id="signupPassword" class="form-control" type="password" name="password" placeholder="Password")
-                        div(class="signup-form-input")
+                        div
                             input(id="passwordConfirm" class="form-control" type="password" name="passwordConfirm" placeholder="Confirm Password")
                         br
                         div
                             input(type="submit" class="btn btn-default colorme-orange" value="Sign Up")
+            div(id="infoContainer")
+                h3 What is CloudNotation?
+                p jfdskla;jlkfjdsa;klf

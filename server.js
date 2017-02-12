@@ -55,8 +55,9 @@ app.use(passport.session());
 app.use(flash());
 
 app.get('/', function(req, res) {
+	console.log(req.user);
 	if(req.user)
-		res.render('index');
+		res.render('index', req.user);
 	else
 		res.redirect('login');
 });
@@ -80,6 +81,11 @@ app.post('/login', function(req, res, next) {
 });
 
 app.post('/register', User.registerUser);
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
 app.get('*', function(req, res) {
 	res.status(404).send();

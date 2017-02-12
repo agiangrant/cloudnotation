@@ -11,43 +11,58 @@ html, body {
 	margin:auto;
 }
 
+#loginContainer {
+	display:inline-block;
+	width:100%;
+	margin:auto;
+	padding:10px;
+	background-color:#EEE;
+	margin-top:30px;
+}
+
 #header {
 	display:inline-block;
 	width:100%;
-	height:30px;
+	height:40px;
+	position:absolute;
 	background-color:#ef6d00;
 	border-bottom: solid 1px black;
 	box-shadow: 1px 1px 10px 1px;
+	padding-left:5px;
 }
 
 #header > h3 {
 	color:white;
 	margin:0px;
+	font-size:35px;
 }
 
 #login {
-	display:block;
+	display:inline-block;
 	margin:auto;
 	margin-left:10%;
 	float:left;
 	width:30%;
 }
 #signup {
-	display:block;
+	display:inline-block;
 	margin:auto;
-	margin-left:10%;
-	float:left;
+	margin-right:20%;
+	float:right;
 	width:40%;
 }
 
 .half-width {
 	display:inline;
-	width:50%;
+	width:48%;
+	max-width:145px;
+	margin:auto;
 }
 
 .signup-form-input {
 	display:block;
 	max-width:300px;
+	min-width:200px;
 }
 
 .colorme-orange {
@@ -57,5 +72,26 @@ html, body {
 
 .colorme-orange:hover {
 	color:white;
-	background-color:#ef6d00;
+	background-color:#ca5c00;
+}
+
+.colorme-orange:active {
+	color:white;
+	background-color:#ff8724;
+}
+
+.form-control {
+	margin:2px;
+}
+
+#infoContainer {
+	padding: 20px;
+}
+
+#signup-error-text, #login-error-text {
+	color:red;
+}
+
+#signup-success-text {
+	color:green;
 }

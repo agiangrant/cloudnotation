@@ -3,10 +3,14 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
+var mongoStore = require('connect-mongo')(expressSession);
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var User = require('./db/user.js');
+var globals = require('./globals.js');
+
+var profile = require('./lib/profile.js');
 
 var app = express();
 
@@ -32,6 +36,7 @@ passport.deserializeUser(function(id, callback) {
 
 
 app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "views", "css")));
 app.use(express.static(path.join(__dirname, "views", "javascript")));
@@ -39,16 +44,14 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSession({
-	secret: 'secret'
-}));//{
-// 	secret: 'make this more secure later',
-// 	resave: false,
-// 	saveUninitialized: false,
-// 	store: new mongoStore({
-// 		url: globals.dbUrl,
-// 		touchAfter: 24*60*60
-// 	})
-// }));
+	secret: 'make this more secure later',
+	resave: false,
+	saveUninitialized: false,
+	store: new mongoStore({
+		url: globals.dbUrl,
+		touchAfter: 24*60*60
+	})
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -86,6 +89,8 @@ app.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
+
+app.get('/profile', profile.getProfile);
 
 app.get('*', function(req, res) {
 	res.status(404).send();

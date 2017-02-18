@@ -6,10 +6,104 @@
 	height:40px;
 	position:absolute;
 	background-color:#ef6d00;
-	border-bottom: solid 1px black;
-	box-shadow: 1px 1px 10px 1px;
+	box-shadow: 0px 2px 2px 0px;
+}
+
+.header-icon {
+	padding:3px;
+}
+
+.header-icon:hover {
+	background-color:#ca5c00;
+	cursor:pointer;
 }
 
 #user {
 	float:right;
+}
+
+.dropdown-settings-content {
+	display:none;
+	position:relative;
+	background-color:#ca5c00;
+	min-width:160px;
+	box-shadow: 0px 2px 2px 0px;
+}
+
+.dropdown-settings-content a{
+	color:white;
+}
+
+.dropdown-settings-content a:hover{
+	text-decoration:none;
+}
+
+.dropdown-link {
+	padding:5px;
+	display:block;
+}
+
+.dropdown-link:hover {
+	background-color: #ef6d00;
+}
+
+.background-darker {
+	background-color: #ca5c00;
+}
+
+#container {
+	display:inline-block;
+	background-color: #ddd;
+	width: 100%;
+	height: 100%;
+	padding-top: 40px;
+}
+
+#chat, #editor {
+	display:none;
+}
+
+#chat, #editor, #profile {
+	width:100%;
+	height:100%;
+}
+
+.profileDiv {
+	background-color: white;
+	border: solid 1px #777;
+	border-left:0px;
+	margin:auto;
+	width:auto;
+	float:left;
+	margin-top: 30px;
+	width: 85%;
+	min-width: 950px;
+	box-shadow: 0px 0px 1px 0px;
+	border-radius: 0px 5px 10px 0px;
+}
+
+.profileHolder {
+	float:left;
+}
+
+.profileImgContainer{
+	display:inline-block;
+	margin:40px;
+	float:left;
+}
+
+#musicProfile {
+	margin-right:20%;
+	float:right;
+}
+
+.profile-label {
+	min-width: 200px;
+	margin:10px;
+	font-weight:lighter;
+	color:#888;
+}
+
+.profile-edit {
+	display:none;
 }

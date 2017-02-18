@@ -134,9 +134,9 @@ function register(req, res) {
 					var password = bcrypt.hashSync(req.body.password, passwordSalt);
 					collection.insertOne({username: req.body.username, password: password,
 						firstName: req.body.firstName, lastName: req.body.lastName}, function(err) {
+						db.close();
 						if(err) {
 							console.log(err.toString() + "blah2");
-							db.close();
 							return res.render('login',{signupError: "An internal server error has occurred. Please try your request later."});
 						}
 						console.log('created user');

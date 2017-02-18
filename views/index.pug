@@ -9,5 +9,57 @@ html
 	body
 		div(id="header")
 			div(id="user")
+				img(src="/images/general_icons/treble_clef.png" class="header-icon")
+				img(src="/images/general_icons/chat_bubble2.png" class="header-icon")
 				span Hello, #{firstName} | 
-				a(href="/logout") Log Out
+				img(src="/images/general_icons/cog.png" id="settingsIcon" class="header-icon dropdown-icon")
+				div(id="settingsDropdown" class="dropdown-settings-content")
+					a(id="loadProfile") 
+						span(class="dropdown-link") My Profile
+					a(href="/logout") 
+						span(class="dropdown-link") Logout
+		div(id="container")
+
+			//- PROFILE SECTION
+			div(id="profile")
+				div(id="profilePane" class="profileDiv")
+					div(id="musicProfile")
+						h1 Music
+						div
+							label(class="profile-label") Instrument
+							span Guitar 
+								img(src="/images/musicons/24/guitar.png")
+						div
+							label(class="profile-label") Favorite Genre
+							span #{genre}
+						div
+							label(class="profile-label") Favorite Artist/Composer
+							span #{composer}
+					div(class="profileImgContainer")
+						img(src="https://a2-images.myspacecdn.com/images03/33/d678ac7225864ed0a3e3364231c1016e/300x300.jpg" class="profilePictureFull")
+					div(id="profileInner" class="profileHolder")
+						h1 Profile
+						div
+							label(class="profile-label") First Name
+							span #{firstName}
+						div
+							label(class="profile-label") Last Name
+							span #{lastName}
+						div
+							label(class="profile-label") Age
+							span(id="profileAge")
+							input(id="profileAgeEdit" class="profile-edit" type="text")
+						div
+							label(class="profile-label") City
+							span(id="profileCity")
+							input(id="profileCityEdit" class="profile-edit" type="text")
+						div
+							label(class="profile-label") State/Province
+							span(id="profileState")
+							input(id="profileStateEdit" class="profile-edit" type="text")
+						div
+							label(class="profile-label") Country
+							span(id="profileCountry")
+							select(id="countrySelect" class="profile-edit")
+			div(id="chat")
+			div(id="editor")

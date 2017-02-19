@@ -11,6 +11,7 @@ var User = require('./db/user.js');
 var globals = require('./globals.js');
 
 var Profile = require('./lib/profile.js');
+var iconServer = require('./lib/iconServer.js');
 
 var app = express();
 
@@ -59,6 +60,10 @@ app.use(flash());
 
 app.get('/profile', Profile.getProfile);
 app.post('/profile', Profile.postProfile);
+
+app.get('/countries', iconServer.getCountryList);
+app.get('/instruments', iconServer.getInstrumentList);
+
 
 app.get('/', function(req, res) {
 	console.log(req.user);

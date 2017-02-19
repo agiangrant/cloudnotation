@@ -17,6 +17,22 @@ var setProfile = function() {
 		$("#profileInstrumentIcon").attr("src", "/images/musicons/24/"+profileData.instrument+".png");
 	$("#profileGenre").text(profileData.genre);
 	$("#profileArtist").text(profileData.artist);
+	$("#profileAge").show();
+	$("#profileCity").show();
+	$("#profileState").show();
+	$("#profileCountry").show();
+	$("#profileInstrument").show();
+	$("#profileGenre").show();
+	$("#profileArtist").show();
+	$("#profileAgeEdit").hide();
+	$("#profileCityEdit").hide();
+	$("#profileStateEdit").hide();
+	$("#profileCountryEdit").hide();
+	$("#profileInstrumentEdit").hide();
+	$("#profileGenreEdit").hide();
+	$("#profileArtistEdit").hide();
+	$("#editProfile").show();
+	$("#saveEditProfile").hide();
 };
 
 $(document).ready(function() {
@@ -63,7 +79,7 @@ $(document).ready(function() {
 		$("#editor").hide();
 		$("#profile").hide();
 		$("#profile").show();
-
+		setProfile();
 		
 		$("#editProfile").on('click', function() {
 			$("#profileAge").hide();
@@ -106,22 +122,6 @@ $(document).ready(function() {
 				profileData = postData;
 				$.ajax({ method: "POST", url: "/profile", data: postData}).done(function() {
 					setProfile();
-					$("#profileAge").show();
-					$("#profileCity").show();
-					$("#profileState").show();
-					$("#profileCountry").show();
-					$("#profileInstrument").show();
-					$("#profileGenre").show();
-					$("#profileArtist").show();
-					$("#profileAgeEdit").hide();
-					$("#profileCityEdit").hide();
-					$("#profileStateEdit").hide();
-					$("#profileCountryEdit").hide();
-					$("#profileInstrumentEdit").hide();
-					$("#profileGenreEdit").hide();
-					$("#profileArtistEdit").hide();
-					$("#editProfile").show();
-					$("#saveEditProfile").hide();
 				});
 			});
 		});

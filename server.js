@@ -10,7 +10,7 @@ var flash = require('connect-flash');
 var User = require('./db/user.js');
 var globals = require('./globals.js');
 
-var profile = require('./lib/profile.js');
+var Profile = require('./lib/profile.js');
 
 var app = express();
 
@@ -57,6 +57,9 @@ app.use(passport.session());
 
 app.use(flash());
 
+app.get('/profile', Profile.getProfile);
+app.post('/profile', Profile.postProfile);
+
 app.get('/', function(req, res) {
 	console.log(req.user);
 	if(req.user)
@@ -89,8 +92,6 @@ app.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
-
-app.get('/profile', profile.getProfile);
 
 app.get('*', function(req, res) {
 	res.status(404).send();

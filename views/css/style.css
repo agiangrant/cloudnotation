@@ -45,6 +45,7 @@
 
 .dropdown-link:hover {
 	background-color: #ef6d00;
+	cursor:pointer;
 }
 
 .background-darker {
@@ -59,7 +60,7 @@
 	padding-top: 40px;
 }
 
-#chat, #editor {
+#chat, #editor, #profile {
 	display:none;
 }
 
@@ -76,8 +77,8 @@
 	width:auto;
 	float:left;
 	margin-top: 30px;
-	width: 85%;
-	min-width: 950px;
+	width: 96%;
+	min-width: 1500px;
 	box-shadow: 0px 0px 1px 0px;
 	border-radius: 0px 5px 10px 0px;
 }
@@ -91,10 +92,16 @@
 	margin:40px;
 	float:left;
 }
+.profileImgContainer > img {
+	max-height:200px;
+	max-width:200px;
+}
 
 #musicProfile {
+	display:block;
 	margin-right:20%;
 	float:right;
+	min-width:100px;
 }
 
 .profile-label {
@@ -106,4 +113,24 @@
 
 .profile-edit {
 	display:none;
+}
+
+.edit-buttons {
+	display:block;
+	float:right;
+	margin:10px;
+}
+.colorme-orange {
+	color:white;
+	background-color:#ef6d00;
+}
+
+.colorme-orange:hover {
+	color:white;
+	background-color:#ca5c00;
+}
+
+.colorme-orange:active {
+	color:white;
+	background-color:#ff8724;
 }

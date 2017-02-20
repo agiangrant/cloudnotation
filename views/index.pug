@@ -3,11 +3,15 @@ html
 		title= "CloudNotation - Music Notation in the Cloud"
 		script(src="jquery-3.1.1.min.js")
 		script(src="bootstrap.min.js")
+		script(src="socket.js")
 		script(src="script.js")
+		script(src="scriptChat.js")
 		link(rel="stylesheet" type="text/css" href="bootstrap.min.css")
 		link(rel="stylesheet" type="text/css" href="style.css")
 	body
 		div(id="header")
+			img(src="/images/general_icons/cn_logo.png" class="header-logo")
+			h3(class="header-logo") CloudNotation
 			div(id="user")
 				img(src="/images/general_icons/treble_clef.png" class="header-icon")
 				img(src="/images/general_icons/chat_bubble2.png" class="header-icon")
@@ -50,9 +54,6 @@ html
 							span(id="profileCountry")
 							img(id="profileCountryFlag")
 							select(id="profileCountryEdit" class="profile-edit")
-					div(class="edit-buttons")
-						button(id="editProfile" type="button" class="btn btn-default") Edit
-						button(id="saveEditProfile" style="display:none;" type="button" class="btn btn-default colorme-orange") Save
 					div(id="musicProfile")
 						h1 Music
 						div
@@ -68,5 +69,10 @@ html
 							label(class="profile-label") Favorite Artist/Composer
 							span(id="profileArtist")
 							input(id="profileArtistEdit" class="profile-edit" type="text")
+					div(class="edit-buttons")
+						button(id="editProfile" type="button" class="btn btn-default") Edit
+						button(id="saveEditProfile" style="display:none;" type="button" class="btn btn-default colorme-orange") Save
 			div(id="chat")
 			div(id="editor")
+		div(id="footer")
+			h3(class="header-logo") Chat

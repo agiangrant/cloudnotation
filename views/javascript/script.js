@@ -6,24 +6,18 @@ var genres = ["Blues", "Classical", "Electronic", "Folk", "Jazz", "Newage", "Pop
 var profileData = {};
 
 var setProfile = function() {
-	$("#profileAge").text(new Date(profileData.age.replace('-','/')).toLocaleDateString());
-	$("#profileCity").text(profileData.city);
-	$("#profileState").text(profileData.state);
-	$("#profileCountry").text(profileData.country+ " ");
+	if(profileData.age !== undefined && profileData.age.length > 0)
+		$("#profileAge").text(new Date(profileData.age.replace('-','/')).toLocaleDateString()).show();
+	$("#profileCity").text(profileData.city).show();
+	$("#profileState").text(profileData.state).show();
+	$("#profileCountry").text(profileData.country || ""+ " ").show();
 	if(profileData.country !== undefined && profileData.country.length > 0)
-		$("#profileCountryFlag").attr("src", "/images/flag_icons/24/"+profileData.country+".png");
-	$("#profileInstrument").text(profileData.instrument+ " ");
+		$("#profileCountryFlag").attr("src", "/images/flag_icons/24/"+profileData.country+".png").show();
+	$("#profileInstrument").text(profileData.instrument || ""+ " ").show();
 	if(profileData.instrument !== undefined && profileData.instrument.length > 0)
-		$("#profileInstrumentIcon").attr("src", "/images/musicons/24/"+profileData.instrument+".png");
-	$("#profileGenre").text(profileData.genre);
-	$("#profileArtist").text(profileData.artist);
-	$("#profileAge").show();
-	$("#profileCity").show();
-	$("#profileState").show();
-	$("#profileCountry").show();
-	$("#profileInstrument").show();
-	$("#profileGenre").show();
-	$("#profileArtist").show();
+		$("#profileInstrumentIcon").attr("src", "/images/musicons/24/"+profileData.instrument+".png").show();
+	$("#profileGenre").text(profileData.genre || "").show();
+	$("#profileArtist").text(profileData.artist).show();
 	$("#profileAgeEdit").hide();
 	$("#profileCityEdit").hide();
 	$("#profileStateEdit").hide();
@@ -36,6 +30,14 @@ var setProfile = function() {
 };
 
 $(document).ready(function() {
+	$(document).on('click', function(evt) {
+		if(evt.target.id == "settingsIcon") {
+			return;
+		}
+		if($("#settingsDropdown").is(":visible")) {
+			$("#settingsIcon").click();
+		}
+	});
 	$("#settingsIcon").on('click', function(){
 		if($("#settingsDropdown").is(":visible")) {
 			$("#settingsDropdown").hide();
@@ -74,7 +76,6 @@ $(document).ready(function() {
 		}
 	});
 	$("#loadProfile").on('click', function() {
-		$("#settingsIcon").click();
 		$("#chat").hide();
 		$("#editor").hide();
 		$("#profile").hide();
@@ -89,24 +90,34 @@ $(document).ready(function() {
 			$("#profileInstrument").hide();
 			$("#profileGenre").hide();
 			$("#profileArtist").hide();
-			$("#profileAgeEdit").val(profileData.age.replace('/','-')).show();
+			$("#profileCountryFlag").hide();
+			$("#profileInstrumentIcon").hide();
+			if(profileData.age !== undefined && profileData.age.length > 0)
+				$("#profileAgeEdit").val(profileData.age.replace('/','-'));
+			$("#profileAgeEdit").show();
 			$("#profileCityEdit").val(profileData.city).show();
 			$("#profileStateEdit").val(profileData.state).show();
 			$("#profileCountryEdit").find('option').remove().end();
 			$.each(countries, function(idx, val) {
 				$("#profileCountryEdit").append("<option value=\""+val+"\">"+val+"</option>");
 			});
-			$("#profileCountryEdit").val(profileData.country).show();
+			if(profileData.country !== undefined && profileData.country.length > 0)
+				$("#profileCountryEdit").val(profileData.country);
+			$("#profileCountryEdit").show();
 			$("#profileInstrumentEdit").find('option').remove().end().show();
 			$.each(instruments, function(idx, val) {
 				$("#profileInstrumentEdit").append("<option value=\""+val+"\">"+val+"</option>");
 			});
-			$("#profileInstrumentEdit").val(profileData.instrument).show();
+			if(profileData.instrument !== undefined && profileData.instrument.length > 0)
+				$("#profileInstrumentEdit").val(profileData.instrument);
+			$("#profileInstrumentEdit").show();
 			$("#profileGenreEdit").find('option').remove().end();
 			$.each(genres, function(idx, val) {
 				$("#profileGenreEdit").append("<option value=\""+val+"\">"+val+"</option>");
 			});
-			$("#profileGenreEdit").val(profileData.genre).show();
+			if(profileData.genre !== undefined && profileData.genre.length > 0)
+				$("#profileGenreEdit").val(profileData.genre);
+			$("#profileGenreEdit").show();
 			$("#profileArtistEdit").show().val(profileData.artist);
 			$("#editProfile").hide();
 			$("#saveEditProfile").show().on('click', function() {

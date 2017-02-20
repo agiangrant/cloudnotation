@@ -8,8 +8,18 @@ html, body{
 	width:100%;
 	height:40px;
 	position:fixed;
+	min-width:600px;
 	background-color:#ef6d00;
 	box-shadow: 0px 2px 2px 0px;
+}
+
+.header-logo {
+	display:inline;
+	padding:3px;
+	float:left;
+	margin:0px;
+	font-size:32px;
+	color:white;
 }
 
 .header-icon {
@@ -80,20 +90,23 @@ html, body{
 	width:auto;
 	float:left;
 	margin-top: 50px;
-	padding-bottom:50px;
 	width: 96%;
-	min-width: 1500px;
+	min-width: 600px;
 	box-shadow: 0px 0px 1px 0px;
 	border-radius: 0px 5px 10px 0px;
+	padding-left:40px;
 }
 
 .profileHolder {
 	float:left;
+	margin-bottom:40px;
+	margin-right:40px;
 }
 
 .profileImgContainer{
-	display:inline-block;
-	margin:40px;
+	display:block;
+	margin-right:40px;
+	margin-top:40px;
 	float:left;
 }
 .profileImgContainer > img {
@@ -103,9 +116,9 @@ html, body{
 
 #musicProfile {
 	display:block;
-	margin-right:20%;
-	float:right;
+	float:left;
 	min-width:100px;
+	margin-right:40px;
 }
 
 .profile-label {
@@ -120,9 +133,10 @@ html, body{
 }
 
 .edit-buttons {
-	display:block;
-	float:right;
-	margin:10px;
+	display:inline-block;
+	float:left;
+	height:inherit;
+	margin:20px;
 }
 .colorme-orange {
 	color:white;
@@ -137,4 +151,14 @@ html, body{
 .colorme-orange:active {
 	color:white;
 	background-color:#ff8724;
+}
+
+/*footer*/
+#footer {
+	background-color:#ef6d00;
+	width:100%;
+	height:40px;
+	position:fixed;
+	bottom:0;
+	box-shadow: 0px -2px 2px 0px;
 }

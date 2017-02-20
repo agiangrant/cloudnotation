@@ -14,6 +14,9 @@ var Profile = require('./lib/profile.js');
 var iconServer = require('./lib/iconServer.js');
 
 var app = express();
+var http = require('http').Server(app);
+require('./lib/chat.js')(http);
+
 
 passport.use(new localStrategy(
 	function(username, password, done) {
@@ -41,6 +44,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "views", "css")));
 app.use(express.static(path.join(__dirname, "views", "javascript")));
+app.use(express.static(path.join(__dirname, "node_modules", "socket.io-client", "lib")));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -103,6 +107,6 @@ app.get('*', function(req, res) {
 });
 
 var port = process.env.PORT || 3000;
-app.listen(port, function(){
+http.listen(port, function(){
 	console.log("Server listening at localhost:"+port);
 });

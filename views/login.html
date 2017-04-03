@@ -1,32 +1,75 @@
 <!DOCTYPE html>
 <head>
+<title>CloudNotation Login</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/login_style.css" />
+<script src="jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/login_script.js"></script>
 </head>
 <body>
+<div class="navbar navbar-default header">
+    <img src="images/general_icons/cn_logo.png"/><h1>Cloud Notation</h1>
+</div>
 <div class="container">
-    <div class="header">
-        <h1>Cloud Notation login</h1>
-    </div>
-    <div class="container">
-        <form method="POST" action="/login">
-            <h2>Log In</h2>
-            <label for="username">Username</label>
-            <input type="text" name="username" />
-            <label for="password">Password</label>
-            <input type="password" name="password" />
-            <button type="submit">Log In</button>
-        </form>
-        <form method="POST" action="/register">
-            <h2>Sign Up</h2>
-            <label for="firstName">First Name</label>
-            <input type="text" name="firstName" />
-            <label for="lastName">Last Name</label>
-            <input type="text" name="lastName" />
-            <label for="username">Username</label>
-            <input type="text" name="username" />
-            <label for="password">Password</label>
-            <input type="password" name="password" />
-            <button type="submit">Sign Up</button>
-        </form>
+    <div class="forms">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-4 login">
+            <form method="POST" action="/login">
+                <h2>Log In</h2>
+                <div class="form-group">
+                    <label for="username" class="form-label">Email Address</label>
+                    <input id="username" class="form-control" type="text" name="username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" class="form-control" type="password" name="password" required/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Log In</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-4 signup">
+            <form method="POST" action="/register">
+                <h2>Sign Up</h2>
+                <div id="firstNameDiv" class="form-group has-feedback">
+                    <label for="firstName" class="control-label">First Name</label>
+                    <input id="firstName" class="form-control" type="text" name="firstName" required aria-describedby="firstNameHelp"/>
+                    <span id="firstNameGlyph" class="glyphicon glyphicon-remove form-control-feedback" style="display:none;" aria-hidden="true"></span>
+                    <span id="firstNameHelp" class="help-block" style="display:none;">Please enter first name.</span>
+                </div>
+                <div id="lastNameDiv" class="form-group has-feedback">
+                    <label for="lastName" class="control-label">Last Name</label>
+                    <input id="lastName" class="form-control" type="text" name="lastName" required aria-describedby="lastNameHelp"/>
+                    <span id="lastNameGlyph" class="glyphicon glyphicon-remove form-control-feedback" style="display:none;" aria-hidden="true"></span>
+                    <span id="lastNameHelp" class="help-block" style="display:none;">Please enter last name.</span>
+                </div>
+                <div id="usernameSDiv" class="form-group has-feedback">
+                    <label for="usernameS" class="control-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                        <input id="usernameS" class="form-control" type="text" name="username" required pattern="..@..*\...*" aria-describedby="usernameSHelp"/>
+                        <span id="usernameSGlyph" class="glyphicon glyphicon-remove form-control-feedback" style="display:none;" aria-hidden="true"></span>
+                    </div>
+                    <span id="usernameSHelp" class="help-block" style="display:none;">Please enter valid email address.</span>
+                </div>
+                <div id="passwordSDiv" class="form-group has-feedback">
+                    <label for="passwordS" class="control-label">Password</label>
+                    <input id="passwordS" class="form-control" type="password" name="password" required/>
+                    <span id="passwordSGlyph" class="glyphicon glyphicon-remove form-control-feedback" style="display:none;" aria-hidden="true"></span>
+                    <span id="passwordSHelp" class="help-block" style="display:none;">Password must be at least 6 characters in length and contain at least one lowercase, uppercase, and numeric character.</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-1">
+        </div>
     </div>
 </div>
 </body>

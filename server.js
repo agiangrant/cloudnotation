@@ -7,6 +7,7 @@ var mongoStore = require('connect-mongo')(expressSession);
 //var User = require('./db/user.js');
 var globals = require('./globals.js');
 var authentication = require('./lib/auth/authentication.js');
+var _ = require('underscore');
 
 var Profile = require('./lib/profile.js');
 var iconServer = require('./lib/iconServer.js');
@@ -41,12 +42,11 @@ app.use(express.static(path.join(__dirname, "node_modules", "bootstrap", "dist")
 app.use(express.static(path.join(__dirname, "node_modules", "jquery", "dist")));
 
 app.get('/', function(req, res) {
-	console.log(JSON.stringify(req.session)+ "session");
-	if(req.session.originalMaxAge === undefined || req.session.originalMaxAge === null) {
-		res.sendFile(path.join(__dirname, 'views', 'login.html'));
+	if(_.isObject(req.cookies) && _.isString(req.cookies.access_token)) {
+		res.sendFile(path.join(__dirname, 'frontend-app', 'dist', 'index.html'));
 	}
 	else {
-		res.sendFile(path.join(__dirname, 'frontend-app', 'dist', 'index.html'));
+		res.sendFile(path.join(__dirname, 'views', 'login.html'));
 	}
 });
 
@@ -54,9 +54,6 @@ app.get('/login', function(req, res) {
 	console.log(JSON.stringify(req.session));
 	res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
-
-//app.post('/login', Authentication.login);
-//app.post('/register', User.registerUser);
 
 app.get('/profile', Profile.getProfile);
 app.post('/profile', Profile.postProfile);
